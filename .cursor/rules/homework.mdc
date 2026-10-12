@@ -1,0 +1,24 @@
+---
+description: System Rules and Harness for WAD Cart Starter
+globs: *.*
+---
+# Stack
+- Plain JavaScript (Node.js).
+- Testing framework: `node:test` only. 
+
+# Commands & Gates
+- Run `npm test` to execute the test suite and verify logic.
+- Run `npm run lint` (or your configured formatter/linter) to ensure code quality.
+- The assistant must run these checks automatically and fix its own mistakes first if any gate fails.
+
+# NEVER Rules
+- NEVER install or use any external dependencies.
+- NEVER skip testing before delivering the final code.
+- NEVER modify `AI-LOG.md`, `BRIEF.md`, or `SELF_ASSESSMENT_REPORT.md`. These are strict manual documentation files maintained solely by the user.
+
+# Business Logic Contract
+- **Freeship:** If `subtotal >= freeShipFrom`, shipping is 0.
+- You are required to ADD new test cases to test/cart.test.js to improve coverage, but NEVER modify existing test cases just to bypass them.
+- **Empty Cart:** Returns `0` immediately (no VAT, no shipping).
+- **Validation:** If `price` is negative, or `qty` is not a positive integer, throw a `RangeError`.
+- **Output:** The final result must be a `number`, rounded to the whole đồng.
